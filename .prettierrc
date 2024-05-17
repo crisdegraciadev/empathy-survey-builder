@@ -1,4 +1,5 @@
 {
+  "plugins": ["prettier-plugin-organize-attributes"],
   "printWidth": 100,
   "singleQuote": true,
   "useTabs": false,
