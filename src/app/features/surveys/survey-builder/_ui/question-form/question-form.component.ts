@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { SelectOption } from '@core/common/types/utils';
 import { ComboboxComponent } from '@ui/combobox/combobox.component';
+import { QuestionEditorComponent } from '../../_pattern/question-editor/question-editor.component';
+import { ToggleComponent } from '@ui/toggle/toggle.component';
 
 @Component({
   selector: 'app-question-form',
   standalone: true,
-  imports: [CommonModule, ComboboxComponent],
+  imports: [CommonModule, ComboboxComponent, ToggleComponent, QuestionEditorComponent],
   templateUrl: './question-form.component.html',
   styleUrl: './question-form.component.scss',
 })

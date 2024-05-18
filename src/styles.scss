@@ -15,3 +15,20 @@
 html {
   background-color: theme('colors.gray.25');
 }
+
+.ce-block__content {
+  margin: 0 !important;
+  max-width: 80%;
+}
+
+.ce-popover {
+  left: -8rem;
+}
+
+.ce-toolbar {
+  left: unset;
+}
+
+.codex-editor__redactor {
+  padding-bottom: 0 !important;
+}

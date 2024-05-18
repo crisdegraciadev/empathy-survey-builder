@@ -13,6 +13,21 @@
       (valueSelect)="onValueSelect($event)"
     />
   </div>
-  <div>body</div>
-  <div>footer</div>
+
+  <div class="mt-5">
+    <app-question-editor />
+  </div>
+
+  <hr class="mt-9" />
+  <div class="mt-5 flex justify-end space-x-4">
+    <div class="flex items-center gap-x-2">
+      <span class="font-medium">Randomize options</span>
+      <app-toggle />
+    </div>
+
+    <div class="flex items-center gap-x-2">
+      <span class="font-medium">Make required</span>
+      <app-toggle />
+    </div>
+  </div>
 </div>
