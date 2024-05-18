@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SurveysComponent } from './surveys.component';
+import { ComboboxComponent } from './combobox.component';
 
-describe('SurveysComponent', () => {
-  let component: SurveysComponent;
-  let fixture: ComponentFixture<SurveysComponent>;
+describe('ComboboxComponent', () => {
+  let component: ComboboxComponent;
+  let fixture: ComponentFixture<ComboboxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SurveysComponent]
+      imports: [ComboboxComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SurveysComponent);
+    fixture = TestBed.createComponent(ComboboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -13,11 +13,6 @@ export const APP_ROUTES: Routes = [
         pathMatch: 'full',
       },
       {
-        path: AppRoutes.DASHBOARD,
-        loadChildren: () =>
-          import('./features/dashboard/dashboard.routes').then((r) => r.DASHBOARD_ROUTES),
-      },
-      {
         path: AppRoutes.SURVEYS,
         loadChildren: () =>
           import('./features/surveys/surveys.routes').then((r) => r.SURVEY_ROUTES),

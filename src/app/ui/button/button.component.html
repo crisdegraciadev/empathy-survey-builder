@@ -1,0 +1,7 @@
+<button class="flex p-1.5">
+  @if (icon(); as iconName) {
+    <fa-icon class="pe-2" [icon]="['fas', iconName]"></fa-icon>
+  }
+
+  {{ text() }}
+</button>

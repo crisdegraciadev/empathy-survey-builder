@@ -1,0 +1,59 @@
+<div class="relative">
+  <button
+    #toggleButton
+    [ngClass]="[
+      'border rounded-lg p-2 bg-white-25 flex items-center gap-x-1.5',
+      isActive() ? 'border-blue-600 text-blue-700' : 'border-gray-300 text-gray-700'
+    ]"
+    (click)="toggle()"
+  >
+    @if (selectedOption()?.icon; as optionIcon) {
+      <fa-icon [fixedWidth]="true" [icon]="[optionIcon.pack, optionIcon.name]" />
+    }
+    <span class="font-semibold">{{ selectedOption()?.label }}</span>
+    <fa-icon [fixedWidth]="true" [icon]="['fas', 'chevron-down']" />
+  </button>
+
+  @if (focused()) {
+    <div
+      class="absolute w-64 mt-1 p-2 bg-gray-50 rounded-lg border border-gray-300 mb-2"
+      #optionList
+    >
+      <div class="flex gap-x-2 bg-white px-3.5 mb-2 py-2 rounded-lg">
+        <fa-icon class="text-gray-500" [fixedWidth]="true" [icon]="['fas', 'search']" />
+        <input
+          class="text-gray-500"
+          class="w-full"
+          [(ngModel)]="searchValue"
+          placeholder="Search"
+        />
+        <fa-icon class="text-gray-800" [fixedWidth]="true" [icon]="['fas', 'expand']" />
+      </div>
+
+      <ul class="flex flex-col gap-y-1">
+        @for (option of optionsToDisplay(); track option.label) {
+          <li
+            [ngClass]="[
+              'px-3.5 py-3 flex items-center gap-x-2 border ',
+              selectedOption()?.value === option.value
+                ? 'bg-white-50 border-gray-400 rounded-lg'
+                : 'border-gray-50'
+            ]"
+            (click)="selectOption(option)"
+          >
+            @if (option.icon; as iconOptions) {
+              <fa-icon
+                [ngClass]="[
+                  selectedOption()?.value === option.value ? 'text-blue-600' : 'text-gray-500'
+                ]"
+                [fixedWidth]="true"
+                [icon]="[iconOptions.pack, iconOptions.name]"
+              />
+            }
+            <span class="text-gray-900 text-sm font-medium">{{ option.label }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</div>
