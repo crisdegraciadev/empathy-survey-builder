@@ -23,14 +23,14 @@ export class SurveyService {
           options: ['Red', 'Blue', 'Green', 'Yellow'],
           randomizeOptionsInd: false,
         },
-        // {
-        //   questionId: 2,
-        //   questionText: 'Please rate your satisfaction with our service.',
-        //   mandatoryInd: false,
-        //   questionType: '2',
-        //   options: ['1', '2', '3'],
-        //   randomizeOptionsInd: true,
-        // },
+        {
+          questionId: 2,
+          questionText: 'Please rate your satisfaction with our service.',
+          mandatoryInd: false,
+          questionType: '2',
+          options: ['1', '2', '3'],
+          randomizeOptionsInd: true,
+        },
       ],
     });
   }

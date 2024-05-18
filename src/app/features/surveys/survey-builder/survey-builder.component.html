@@ -7,7 +7,11 @@
 
     <div class="flex flex-col space-y-6">
       @for (question of survey.questions; track question.questionId; let idx = $index) {
-        <app-question-form [questionNumber]="idx + 1" [isActive]="idx % 2 === 0" />
+        <app-question-form
+          [questionNumber]="idx"
+          [isActive]="activeQuestion() === idx"
+          (select)="setActiveQuestion($event)"
+        />
       }
     </div>
 

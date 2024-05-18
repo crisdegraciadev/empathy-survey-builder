@@ -56,6 +56,7 @@ export class ComboboxComponent implements OnInit {
         !this.optionList()?.nativeElement.contains(e.target)
       ) {
         this.focused.set(false);
+        this.searchValue.set('');
       }
     });
   }

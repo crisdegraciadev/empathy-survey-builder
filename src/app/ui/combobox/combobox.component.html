@@ -8,7 +8,7 @@
     (click)="toggle()"
   >
     @if (selectedOption()?.icon; as optionIcon) {
-      <fa-icon [fixedWidth]="true" [icon]="[optionIcon.pack, optionIcon.name]" />
+      <fa-icon [fixedWidth]="true" [icon]="['fas', optionIcon.name]" />
     }
     <span class="font-semibold">{{ selectedOption()?.label }}</span>
     <fa-icon [fixedWidth]="true" [icon]="['fas', 'chevron-down']" />

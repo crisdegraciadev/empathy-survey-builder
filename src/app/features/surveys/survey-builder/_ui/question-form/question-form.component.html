@@ -1,10 +1,11 @@
 <div
   [ngClass]="['border rounded-lg p-6 pb-5', !isActive() ? 'border-gray-300' : 'border-blue-600']"
+  (click)="setSelected()"
 >
   <div class="flex items-center gap-x-2">
     <span
       class="bg-gray-600 text-gray-25 px-2.5 py-1.5 rounded-lg font-semibold text-base text-center"
-      >Q{{ questionNumber() }}</span
+      >Q{{ questionNumber() + 1 }}</span
     >
     <app-combobox
       [isActive]="isActive()"

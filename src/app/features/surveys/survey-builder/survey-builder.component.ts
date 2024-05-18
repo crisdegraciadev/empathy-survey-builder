@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '@core/surveys/services/survey.service';
+import { ButtonComponent } from '@ui/button/button.component';
 import { Observable, map, switchMap } from 'rxjs';
 import { QuestionFormComponent } from './_ui/question-form/question-form.component';
-import { ButtonComponent } from '@ui/button/button.component';
 
 @Component({
   selector: 'app-survey-builder',
@@ -20,4 +20,10 @@ export class SurveyBuilderComponent {
   id$: Observable<string> = this.route.params.pipe(map(({ id }) => id));
 
   survey$ = this.id$.pipe(switchMap((id) => this.surveyService.findSurvey(id)));
+
+  activeQuestion = signal(-1);
+
+  setActiveQuestion(idx: number) {
+    this.activeQuestion.set(idx);
+  }
 }
