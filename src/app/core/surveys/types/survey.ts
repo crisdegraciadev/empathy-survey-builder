@@ -5,6 +5,8 @@ export type Survey = {
   questions: Question[];
 };
 
+export type SurveyDTO = Omit<Survey, 'id'>;
+
 export type Question = {
   questionId: number;
   questionText: string;
@@ -14,4 +16,4 @@ export type Question = {
   randomizeOptionsInd: boolean;
 };
 
-export type QuestionType = '1' | '2' | '3' | '4';
+export type QuestionType = 1 | 2 | 3 | 4;

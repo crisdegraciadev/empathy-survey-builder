@@ -5,7 +5,6 @@ import {
   OnInit,
   Renderer2,
   computed,
-  effect,
   inject,
   input,
   model,
@@ -29,8 +28,9 @@ export class ComboboxComponent implements OnInit {
 
   isActive = input.required<boolean>();
   options = input.required<SelectOption[]>();
+  defaulValue = input<number>();
 
-  valueSelect = output<string>();
+  valueSelect = output<number>();
 
   toggleButton = viewChild<ElementRef>('toggleButton');
   optionList = viewChild<ElementRef>('optionList');
@@ -46,7 +46,12 @@ export class ComboboxComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkIfClickedOutside();
-    this.selectedOption.set(this.options()[0]);
+
+    const options = this.options();
+
+    this.selectedOption.set(
+      options.find(({ value }) => value === this.defaulValue()) ?? options[0],
+    );
   }
 
   private checkIfClickedOutside() {

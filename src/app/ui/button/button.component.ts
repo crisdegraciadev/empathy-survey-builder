@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,4 +13,6 @@ import { IconName } from '@fortawesome/free-solid-svg-icons';
 export class ButtonComponent {
   text = input.required<string>();
   icon = input<IconName>();
+
+  buttonClick = output<void>();
 }

@@ -1,4 +1,4 @@
 <label class="toggle">
-  <input class="toggle__input" (change)="setValue()" type="checkbox" />
+  <input class="toggle__input" [checked]="value()" (change)="setValue()" type="checkbox" />
   <div class="toggle__fill"></div>
 </label>

@@ -10,24 +10,34 @@
     <app-combobox
       [isActive]="isActive()"
       [options]="QUESTION_TYPES"
-      (valueSelect)="onValueSelect($event)"
+      [defaulValue]="question().questionType"
+      (valueSelect)="onQuestionTypeSelect($event)"
     />
   </div>
 
   <div class="mt-5">
-    <app-question-editor />
+    <app-question-editor
+      [defaultData]="question()"
+      (valueChange)="onQuestionContentChange($event)"
+    />
   </div>
 
   <hr class="mt-9" />
   <div class="mt-5 flex justify-end space-x-4">
     <div class="flex items-center gap-x-2">
       <span class="font-medium">Randomize options</span>
-      <app-toggle />
+      <app-toggle
+        [defaultValue]="question().randomizeOptionsInd"
+        (valueChange)="onRandomizeChange($event)"
+      />
     </div>
 
     <div class="flex items-center gap-x-2">
       <span class="font-medium">Make required</span>
-      <app-toggle />
+      <app-toggle
+        [defaultValue]="question().mandatoryInd"
+        (valueChange)="onMandatoryChange($event)"
+      />
     </div>
   </div>
 </div>

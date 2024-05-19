@@ -1,4 +1,4 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, OnInit, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,12 +8,18 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './toggle.component.html',
   styleUrl: './toggle.component.scss',
 })
-export class ToggleComponent {
+export class ToggleComponent implements OnInit {
+  defaultValue = input<boolean>(false);
   value = signal<boolean>(false);
 
   valueChange = output<boolean>();
 
+  ngOnInit(): void {
+    this.value.set(this.defaultValue());
+  }
+
   setValue() {
     this.value.update((state) => !state);
+    this.valueChange.emit(this.value());
   }
 }
