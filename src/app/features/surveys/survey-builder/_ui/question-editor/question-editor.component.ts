@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, input, output, viewChild } from '@angula
 import { Question } from '@core/surveys/types/survey';
 import EditorJS, { OutputData } from '@editorjs/editorjs';
 import NestedList from '@editorjs/nested-list';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable, Subscriber, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-question-editor',
@@ -61,7 +61,7 @@ export class QuestionEditorComponent implements OnInit {
       },
     );
 
-    elementChanges$.subscribe(() => {
+    elementChanges$.pipe(debounceTime(500)).subscribe(() => {
       this.editor.save().then(({ blocks }) => {
         const paragraph = blocks.find(({ type }) => type === 'paragraph');
         const list = blocks.find(({ type }) => type === 'list');
