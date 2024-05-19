@@ -1,6 +1,6 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { Routes, provideRouter } from '@angular/router';
+import { Routes, provideRouter, withHashLocation } from '@angular/router';
 import { apiInterceptor } from './common/interceptors/api.interceptor';
 
 export type CoreOptions = {
@@ -10,7 +10,7 @@ export type CoreOptions = {
 export function provideCore({ routes }: CoreOptions) {
   return [
     provideAnimationsAsync(),
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
     provideHttpClient(),
     withInterceptors([apiInterceptor]),
   ];
