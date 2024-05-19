@@ -9,7 +9,7 @@ export const APP_ROUTES: Routes = [
     children: [
       {
         path: AppRoutes.ROOT,
-        redirectTo: AppRoutes.DASHBOARD,
+        redirectTo: AppRoutes.SURVEYS,
         pathMatch: 'full',
       },
       {
@@ -19,4 +19,5 @@ export const APP_ROUTES: Routes = [
       },
     ],
   },
+  { path: '**', redirectTo: AppRoutes.SURVEYS },
 ];
