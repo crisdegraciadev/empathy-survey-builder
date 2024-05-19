@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, input, output, viewChild } from '@angular/core';
-import { Question } from '@core/surveys/types/survey';
+import { Question, QuestionContent } from '@core/surveys/types/survey';
 import EditorJS, { OutputData } from '@editorjs/editorjs';
 import NestedList from '@editorjs/nested-list';
 import { Observable, Subscriber, debounceTime } from 'rxjs';
@@ -13,7 +13,7 @@ import { Observable, Subscriber, debounceTime } from 'rxjs';
 })
 export class QuestionEditorComponent implements OnInit {
   defaultData = input<Question>();
-  valueChange = output<{ questionText: string; options: string[] }>();
+  valueChange = output<QuestionContent>();
 
   editorElement = viewChild<ElementRef>('editor');
 

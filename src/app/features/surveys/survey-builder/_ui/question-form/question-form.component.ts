@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SelectOption } from '@core/common/types/utils';
-import { Question, QuestionType } from '@core/surveys/types/survey';
+import { Question, QuestionContent, QuestionType } from '@core/surveys/types/survey';
 import { ComboboxComponent } from '@ui/combobox/combobox.component';
 import { ToggleComponent } from '@ui/toggle/toggle.component';
 import { QuestionEditorComponent } from '../question-editor/question-editor.component';
@@ -65,7 +65,7 @@ export class QuestionFormComponent implements OnInit {
     return [1, 2, 3, 4].some((type) => value === type);
   }
 
-  onQuestionContentChange({ questionText, options }: { questionText: string; options: string[] }) {
+  onQuestionContentChange({ questionText, options }: QuestionContent) {
     this.form.patchValue({ questionText, options });
   }
 
