@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, input, output } from '@angular/core';
+import { Component, OnDestroy, OnInit, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SelectOption } from '@core/common/types/utils';
 import { Question, QuestionContent, QuestionType } from '@core/surveys/types/survey';
 import { ComboboxComponent } from '@ui/combobox/combobox.component';
 import { ToggleComponent } from '@ui/toggle/toggle.component';
 import { QuestionEditorComponent } from '../question-editor/question-editor.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-question-form',
@@ -20,13 +21,15 @@ import { QuestionEditorComponent } from '../question-editor/question-editor.comp
   templateUrl: './question-form.component.html',
   styleUrl: './question-form.component.scss',
 })
-export class QuestionFormComponent implements OnInit {
+export class QuestionFormComponent implements OnInit, OnDestroy {
   isActive = input.required<boolean>();
   questionNumber = input.required<number>();
   question = input.required<Question>();
 
   select = output<number>();
   valueChange = output<Question>();
+
+  destroy$ = new Subject<void>();
 
   readonly QUESTION_TYPES: SelectOption[] = [
     { icon: { name: 'circle-check', pack: 'far' }, label: 'Single choice', value: 1 },
@@ -45,10 +48,14 @@ export class QuestionFormComponent implements OnInit {
     const { questionId, ...questionData } = this.question();
     this.form.setValue({ ...questionData });
 
-    this.form.valueChanges.subscribe(() => {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
       const values = this.form.getRawValue();
       this.valueChange.emit({ ...values, questionId });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   setSelected() {

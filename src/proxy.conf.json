@@ -1,7 +1,0 @@
-{
-  "/api": {
-    "target": "https://techtestapi1.azurewebsites.net",
-    "secure": true,
-    "changeOrigin": true
-  }
-}

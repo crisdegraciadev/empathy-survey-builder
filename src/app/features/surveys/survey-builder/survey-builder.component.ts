@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '@core/surveys/services/survey.service';
 import { Question, Survey } from '@core/surveys/types/survey';
 import { ButtonComponent } from '@ui/button/button.component';
-import { Observable, Subject, map, switchMap, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, map, of, switchMap, takeUntil, tap } from 'rxjs';
 import { QuestionFormComponent } from './_ui/question-form/question-form.component';
 
 @Component({
@@ -34,13 +34,13 @@ export class SurveyBuilderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.survey$.pipe(takeUntil(this.destroy$)).subscribe();
 
-    this.refreshSurvey$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      const currentSurvey = this.currentSurvey();
-
-      if (currentSurvey) {
-        this.surveyService.updateSurvey(currentSurvey.id, currentSurvey).subscribe();
-      }
-    });
+    this.refreshSurvey$
+      .pipe(
+        takeUntil(this.destroy$),
+        map(() => this.currentSurvey()),
+        switchMap((survey) => (survey ? this.surveyService.updateSurvey(survey.id, survey) : of())),
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

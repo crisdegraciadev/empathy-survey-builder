@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, input, output, viewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, input, output, viewChild } from '@angular/core';
 import { Question, QuestionContent } from '@core/surveys/types/survey';
-import EditorJS, { OutputData } from '@editorjs/editorjs';
+import EditorJS, { OutputBlockData, OutputData } from '@editorjs/editorjs';
 import NestedList from '@editorjs/nested-list';
-import { Observable, Subscriber, debounceTime } from 'rxjs';
+import { Observable, Subject, Subscriber, debounceTime, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-question-editor',
@@ -11,7 +11,7 @@ import { Observable, Subscriber, debounceTime } from 'rxjs';
   templateUrl: './question-editor.component.html',
   styleUrl: './question-editor.component.scss',
 })
-export class QuestionEditorComponent implements OnInit {
+export class QuestionEditorComponent implements OnInit, OnDestroy {
   defaultData = input<Question>();
   valueChange = output<QuestionContent>();
 
@@ -19,11 +19,17 @@ export class QuestionEditorComponent implements OnInit {
 
   private mutationObserver!: MutationObserver;
 
+  destroy$ = new Subject<void>();
+
   private editor!: EditorJS;
 
   ngOnInit(): void {
     this.initializeEditor();
     this.checkForChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   private initializeEditor() {
@@ -61,7 +67,7 @@ export class QuestionEditorComponent implements OnInit {
       },
     );
 
-    elementChanges$.pipe(debounceTime(500)).subscribe(() => {
+    elementChanges$.pipe(debounceTime(500), takeUntil(this.destroy$)).subscribe(() => {
       this.editor.save().then(({ blocks }) => {
         const paragraph = blocks.find(({ type }) => type === 'paragraph');
         const list = blocks.find(({ type }) => type === 'list');
